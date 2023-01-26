@@ -41,31 +41,23 @@ def prep_telco(df):
     return telco_df
 
 
-
-## TELCO DATA TRAIN-TEST-VALIDATE.
-## USES TELCO DATASET AS DEFINITION, BUT CAN TAKE IN ANY DATASET.
     
-def telco_training_validate_testing(df, target = ''):
+# Fuction to split data into train, validate, split
+
+
+def tts(df):
     
     '''
-    This function serves to split data into training, validating
-    and testing groups, allowing for machine learning-training 
-    to be undertaken.
+    this function splits the prepared Zillow data 
+    into train, validate and test
     '''
-    
-    seed = 27  
-    
-    train_telco, val_telco = train_test_split(tidied_telco, 
-                                              train_size = 0.7, 
-                                              random_state = seed, 
-                                              stratify = tidied_telco[target])
 
-    validate_telco, test_telco = train_test_split(val_test, 
-                                                  train_size = 0.5, 
-                                                  random_state = seed, 
-                                                  stratify = val_test[target])
+    # train/validate/test split
+    train_validate, test = train_test_split(df, test_size = 0.2, random_state = 23)
+    train, validate = train_test_split(train_validate, test_size = 0.3, random_state = 23)
     
-    return train_telco, validate_telco, test_telco 
+    return train, validate, test
+
 
 
 
